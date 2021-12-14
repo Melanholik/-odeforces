@@ -2,7 +2,7 @@ package round756Div3;
 
 import java.util.Scanner;
 
-public class zadB {
+public class ZadB {
     public static void zadB(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int index = scanner.nextInt();
@@ -25,8 +25,7 @@ public class zadB {
 
 
     public static int find(int a, int b) {
-        int remainder = a - 2 * b;
-        if (remainder >= b * 2) {
+        if (a / 3 >= b) {
             return b;
         }
         return (a + b) / 4;

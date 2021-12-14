@@ -13,60 +13,30 @@ public class ZadC {
                 mas[j] = scanner.nextInt();
             }
             int start = 0;
-            int end = length;
+            int[] sum = new int[]{};
             boolean isCorrect = true;
-            int lastIndex = -1;
-            int sum = 0;
-            int k = 10;
-            while (start != end && isCorrect) {
-                int needIndex = findMaxElement(mas, start, end);
-                if (needIndex == start) {
-                    if (lastIndex == -1) {
-                        sum += mas[start];
-                        lastIndex = start;
-                    } else {
-                        if (needIndex > lastIndex) {
-                            sum = k * mas[needIndex] + sum;
-                            k *= 10;
-                        } else {
-                            sum = sum * 10 + mas[needIndex];
-                        }
-                    }
-                    start++;
-                } else if (needIndex == end - 1) {
-                    if (lastIndex == -1) {
-                        sum += mas[end - 1];
-                        lastIndex = end - 1;
-                    } else {
-                        if (needIndex > lastIndex) {
-                            sum = k * mas[needIndex] + sum;
-                            k *= 10;
-                        } else {
-                            sum = sum * 10 + mas[needIndex];
-                        }
-                    }
-                    end--;
-                } else {
-                    isCorrect = false;
-                }
+            int needIndex = findMaxElement(mas, start, length);
+            if (needIndex == start) {
+                sum = firstNumber(needIndex, mas, start + 1, length);
+            } else if (needIndex == length - 1) {
+                sum = firstNumber(needIndex, mas, start, length - 1);
+            } else {
+                isCorrect = false;
             }
             if (isCorrect) {
-                while (sum != 0) {
-                    System.out.print(sum % 10);
-                    sum /= 10;
-                    if (sum > 0) {
+                for (int j = 0; j < sum.length; j++) {
+                    System.out.print(sum[j]);
+                    if (j != sum.length - 1) {
                         System.out.print(" ");
                     }
                 }
+
 
             } else {
                 System.out.print(-1);
             }
             System.out.println();
-
-
         }
-
     }
 
     public static int findMaxElement(int[] a, int start, int end) {
@@ -84,4 +54,13 @@ public class ZadC {
         return indexMax;
     }
 
+    public static int[] firstNumber(int indexMax, int[] a, int start, int end) {
+        int[] sum = new int[a.length];
+        sum[0] = a[indexMax];
+        int index = 1;
+        for (int i = end - 1; i >= start; i--) {
+            sum[index++] = a[i];
+        }
+        return sum;
+    }
 }
