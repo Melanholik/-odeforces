@@ -35,7 +35,6 @@ public class Task3 {
             } else {
                 booleans[number - 1] = true;
             }
-
         }
         return isCan;
     }
